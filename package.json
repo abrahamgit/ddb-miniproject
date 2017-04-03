@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "description": "Hotel Management System using distributed databases. Works using oracle db",
   "repository": {
-    "url": "https://github.com/mgechev/angular-seed"
+    "url": "https://github.com/pavan-08/ddb-miniproject"
   },
   "scripts": {
     "build.dev": "gulp build.dev --color --env-config dev",
@@ -44,6 +44,11 @@
     "serve.compodoc": "node_modules/.bin/compodoc -s"
   },
   "author": "Minko Gechev <mgechev>",
+  "contributors": [
+    {
+        "name": "Pavan Chhatpar <pavan-08>"
+    }
+  ],
   "license": "MIT",
   "devDependencies": {
     "@angular/compiler-cli": "^4.0.0",
