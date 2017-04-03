@@ -5,7 +5,7 @@ import { NameListService } from '../shared/name-list/name-list.service';
  * This class represents the lazy loaded HomeComponent.
  */
 @Component({
-  moduleId: module.id,
+  /*moduleId: module.id,*/
   selector: 'sd-home',
   templateUrl: 'home.component.html',
   styleUrls: ['home.component.css'],
@@ -41,6 +41,7 @@ export class HomeComponent implements OnInit {
         error => this.errorMessage = <any>error
       );
   }
+
 
   /**
    * Pushes a new name onto the names array
