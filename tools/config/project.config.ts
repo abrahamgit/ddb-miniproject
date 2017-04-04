@@ -10,7 +10,12 @@ import { SeedConfig } from './seed.config';
 export class ProjectConfig extends SeedConfig {
 
   PROJECT_TASKS_DIR = join(process.cwd(), this.TOOLS_DIR, 'tasks', 'project');
-
+  //ORACLE DB Configurations start
+  ORACLEDB_USER = 'pavan';
+  ORACLEDB_PASSWORD = 'pavan';
+  ORACLEDB_CONNECT_STRING = 'localhost/XE';
+  ORACLEDB_EXTERNAL_AUTH = false;
+  //ORACLE DB Configurations end
   constructor() {
     super();
     // this.APP_TITLE = 'Put name of your app here';
@@ -54,6 +59,8 @@ export class ProjectConfig extends SeedConfig {
     * @type {string}
     */
     this.APP_TITLE = 'Hotel Management System!';
+
+
   }
 
 }
