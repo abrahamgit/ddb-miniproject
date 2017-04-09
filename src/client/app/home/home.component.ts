@@ -22,7 +22,9 @@ export class HomeComponent implements OnInit {
   raw: boolean = false;
   none: boolean = true;
   err:boolean = false;
+  insert: boolean = false;
   error: string = '';
+  rowsAffected: string = '';
   /**
    * Creates an instance of the HomeComponent with the injected
    * NameListService.
@@ -38,16 +40,6 @@ export class HomeComponent implements OnInit {
    */
   ngOnInit() {
     this.populateQueries();
-    //this.runQuery('/select?columns=*&table=Staff', false);
-    this.oracle.get('/select?columns=*&table=Staff')
-        .subscribe(
-          result => {
-            console.log(result);
-          },
-          error => {
-            console.error(error);
-          }
-        );
   }
 
   populateQueries() {
@@ -58,7 +50,7 @@ export class HomeComponent implements OnInit {
       },
       {
         statement: '2. Display the offers and extra services provided by the hotel',
-        sql: '/raw?query=SELECT e.id as Extra_ID,o.slug,o.expiresat,o.description,o.price as Cost,o.stock,e.type,e.name,e.price FROM Offers o INNER JOIN offerextras p ON o.id = p.offerID INNER JOIN Extras e ON p.extraID = e.id'
+        sql: '/raw?query=SELECT e.id as Extra_ID,o.slug,o.expiresat,o.description,o.price as Offer_price,o.stock,e.type,e.name,e.price as Extra_Price FROM Offers o INNER JOIN offerextras p ON o.id = p.offerID INNER JOIN Extras e ON p.extraID = e.id'
       },
       {
         statement: '3. Display the details of the rooms and category of rooms booked by the customers',
@@ -98,16 +90,22 @@ export class HomeComponent implements OnInit {
     this.raw = raw;
     this.err = false;
     this.none = false;
+    this.rowsAffected = '';
     this.oracle.get(query)
         .subscribe( 
           result => {
             this.rows = result.rows;
             this.names = result.names;
+            this.insert = result.rowsAffected != undefined;
+            this.rowsAffected = 'rows affected -> ' + result.rowsAffected;
           },
           error => { 
             this.err=true;
             console.error(error);
-            this.error = error
+            this.error = error;
+            this.rows = [];
+            this.names = [];
+            this.insert = false;
           }
         );
   }
