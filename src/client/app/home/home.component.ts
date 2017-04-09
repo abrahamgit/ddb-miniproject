@@ -58,7 +58,7 @@ export class HomeComponent implements OnInit {
       },
       {
         statement: '2. Display the offers and extra services provided by the hotel',
-        sql: '/raw?query=SELECT o.slug,o.price,o.expiresat,o.description,o.stock,e.type,e.name,e.price,e.id FROM Offers o INNER JOIN offerextras p ON o.id = p.offerID INNER JOIN Extras e ON p.extraID = e.id'
+        sql: '/raw?query=SELECT e.id as Extra_ID,o.slug,o.expiresat,o.description,o.price as Cost,o.stock,e.type,e.name,e.price FROM Offers o INNER JOIN offerextras p ON o.id = p.offerID INNER JOIN Extras e ON p.extraID = e.id'
       },
       {
         statement: '3. Display the details of the rooms and category of rooms booked by the customers',
