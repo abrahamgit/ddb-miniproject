@@ -26,33 +26,50 @@ ul {
     padding-top: 60px;
 }
 
-.sidenav a {
-    padding: 8px 8px 8px 32px;
-    text-decoration: none;
-    font-size: 25px;
-    color: #818181;
-    display: block;
-    transition: 0.3s;
-}
+  .sidenav a {
+      padding: 8px 8px 8px 32px;
+      text-decoration: none;
+      font-size: 20px;
+      color: #818181;
+      display: block;
+      transition: 0.3s;
+  }
 
-.sidenav a:hover, .offcanvas a:focus{
-    color: #f1f1f1;
-}
+  .sidenav a:hover, .offcanvas a:focus{
+      color: #f1f1f1;
+  }
 
-.sidenav .closebtn {
-    position: absolute;
-    top: 0;
-    right: 25px;
-    font-size: 36px;
-    margin-left: 50px;
-}
+  .sidenav .closebtn {
+      position: absolute;
+      top: 0;
+      right: 25px;
+      font-size: 36px;
+      margin-left: 50px;
+  }
 
-@media screen and (max-height: 450px) {
-  .sidenav {padding-top: 15px;}
-  .sidenav a {font-size: 18px;}
-}
+  @media screen and (max-height: 450px) {
+    .sidenav {padding-top: 15px;}
+    .sidenav a {font-size: 18px;}
+  }
 
-.table-container {
-  margin-left: 330px;
-}
+  .table-container {
+    margin-left: 330px;
+    text-align: center;
+  }
+
+  .query-input {
+    width: 75%;
+    margin: 5px;
+  }
+  .run-button {
+    width: 20%;
+    text-align: center;
+  }
+
+  .code {
+    background: url("./assets/ic_code_black_24dp_2x.png");
+    height: 50px;
+    width: 50px;
+    margin-left:47%;
+  }
 }

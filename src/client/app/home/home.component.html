@@ -7,10 +7,20 @@
   <li *ngFor="let name of names">{{name}}</li>
 </ul>
  -->
-<div class="row"> 
-	<div class="col-md-3 sidenav">
-  		<a href="#" (click)="runQuery(query.sql)" *ngFor="let query of queries">{{query.statement}}</a>
-	</div> 
+<div class="row" style="margin-right: 0px"> 
+	<div class=" sidenav">
+  		<a href="#" (click)="runQuery(query.sql, false)" *ngFor="let query of queries">{{query.statement}}</a>
+  		<a href="#" (click)="rawQuery()">Generic Query Runner!</a>
+	</div>
+	
+	<div *ngIf="raw" class="col-md-9 table-container">
+		<input [(ngModel)]="quer" name="quer" class="query-input" placeholder="Enter A Query"/>
+		<button (click)="runQuery('/raw?query=' + quer, true)" class="run-button">Run</button>
+	</div>
+	<div *ngIf="none" class="col-md-9 table-container" style="margin-top:20%">
+		<div class="code"></div><br/>
+		Run a Query to see results here!
+	</div>
 	<div class="col-md-9 table-container"> 
 		<table class="table">
 			<thead>

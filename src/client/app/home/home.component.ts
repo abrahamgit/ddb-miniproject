@@ -19,6 +19,8 @@ export class HomeComponent implements OnInit {
   quer:string = ''; 
   rows: any[] = [];
   queries: any[] = [];
+  raw: boolean = false;
+  none: boolean = true;
   /**
    * Creates an instance of the HomeComponent with the injected
    * NameListService.
@@ -34,7 +36,7 @@ export class HomeComponent implements OnInit {
    */
   ngOnInit() {
     this.populateQueries();
-    this.runQuery('/select?columns=*&table=Staff');
+    //this.runQuery('/select?columns=*&table=Staff', false);
     this.oracle.get('/select?columns=*&table=Staff')
         .subscribe(
           result => {
@@ -90,7 +92,9 @@ export class HomeComponent implements OnInit {
       );
   }*/
 
-  runQuery(query: string) {
+  runQuery(query: string, raw:boolean) {
+    this.raw = raw;
+    this.none = false;
     this.oracle.get(query)
         .subscribe( 
           result => {
@@ -101,6 +105,13 @@ export class HomeComponent implements OnInit {
             console.error(error);
           }
         );
+  }
+
+  rawQuery() {
+    this.rows=[];
+    this.names=[];
+    this.raw=true;
+    this.none = true;
   }
 
   /**
