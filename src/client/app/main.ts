@@ -1,4 +1,5 @@
 import 'zone.js/dist/zone';
+import '../css/main.scss';
 /**
  * Bootstraps the application and makes the ROUTER_PROVIDERS and the APP_BASE_HREF available to it.
  * @see https://angular.io/docs/ts/latest/api/platform-browser-dynamic/index/bootstrap-function.html
