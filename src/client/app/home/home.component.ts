@@ -61,20 +61,20 @@ export class HomeComponent implements OnInit {
         sql: '/raw?query=SELECT ca.name,ca.city,ca.contact,r.id,r.location,c.bedcount,c.isac,c.price,c.name FROM Customer ca INNER JOIN Booking b ON ca.id=b.customerID INNER JOIN Room r ON b.roomID = r.id INNER JOIN Category c ON r.categoryid = c.id'
       },
       {
-        statement: '',
-        sql: ''
+        statement: '4. Display all the details of the Customers from its corresponding fragments',
+        sql: '/raw?query=SELECT * FROM CustomerMUM UNION SELECT * FROM CustomerPUN UNION SELECT * FROM CustomerGOA'
       },
       {
-        statement: '',
-        sql: ''
+        statement: '5. Display the booking details of all the customers',
+        sql: '/raw?query=SELECT b.id,b.roomID,b.checkinat,b.checkoutat FROM Booking b INNER JOIN (SELECT * FROM CustomerMUM UNION SELECT * FROM CustomerPUN UNION SELECT * FROM CustomerGOA) c ON c.id = b.customerID'
       },
       {
-        statement: '',
-        sql: ''
+        statement: '6. Display the contents of Staff using the vertical fragments created',
+        sql: '/raw?query=SELECT b.*, l.emailid, l.password FROM StaffBio@hms2 b INNER JOIN StaffLogin@hms12 l ON b.id=l.id'
       },
       {
-        statement: '',
-        sql: ''
+        statement: '7. Display the biodata of all the workers of Staffs from its fragments',
+        sql: '/raw?query=SELECT * FROM StaffBioMUM@hms2 UNION SELECT * FROM StaffBioPUN@hms2 UNION SELECT * FROM StaffBioGOA@hms2'
       }      
     ]
   }
