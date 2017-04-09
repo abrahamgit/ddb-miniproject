@@ -21,6 +21,8 @@ export class HomeComponent implements OnInit {
   queries: any[] = [];
   raw: boolean = false;
   none: boolean = true;
+  err:boolean = false;
+  error: string = '';
   /**
    * Creates an instance of the HomeComponent with the injected
    * NameListService.
@@ -94,6 +96,7 @@ export class HomeComponent implements OnInit {
 
   runQuery(query: string, raw:boolean) {
     this.raw = raw;
+    this.err = false;
     this.none = false;
     this.oracle.get(query)
         .subscribe( 
@@ -102,7 +105,9 @@ export class HomeComponent implements OnInit {
             this.names = result.names;
           },
           error => { 
+            this.err=true;
             console.error(error);
+            this.error = error
           }
         );
   }

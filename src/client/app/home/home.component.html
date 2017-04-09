@@ -21,6 +21,10 @@
 		<div class="code"></div><br/>
 		Run a Query to see results here!
 	</div>
+	<div *ngIf="err" class="col-md-9 table-container" style="margin-top:15%">
+		<div class="err"></div><br/>
+		An error occured!
+	</div>
 	<div class="col-md-9 table-container"> 
 		<table class="table">
 			<thead>
