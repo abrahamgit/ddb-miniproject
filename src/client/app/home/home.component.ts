@@ -52,7 +52,7 @@ export class HomeComponent implements OnInit {
     this.queries = [
       {
         statement: '1. Display the number of bookings done by all the customers',
-        sql: '/select?columns=Count(*) As Total_Bookings, CustomerID&table=Booking&groupby=customerID',
+        sql: '/select?columns=CustomerID, Count(*) As Total_Bookings&table=Booking&groupby=customerID',
       },
       {
         statement: '2. Display the offers and extra services provided by the hotel',
@@ -60,7 +60,7 @@ export class HomeComponent implements OnInit {
       },
       {
         statement: '3. Display the details of the rooms and category of rooms booked by the customers',
-        sql: '/raw?query=SELECT ca.name,ca.city,ca.contact,r.id,r.location,c.bedcount,c.isac,c.price,c.name FROM Customer ca INNER JOIN Booking b ON ca.id=b.customerID INNER JOIN Room r ON b.roomID = r.id INNER JOIN Category c ON r.categoryid = c.id'
+        sql: '/raw?query=SELECT ca.name AS Customer_Name,ca.city,ca.contact,r.id AS Room_Number,r.location,c.bedcount,c.isac,c.price,c.name AS Category_Name FROM Customer ca INNER JOIN Booking b ON ca.id=b.customerID INNER JOIN Room r ON b.roomID = r.id INNER JOIN Category c ON r.categoryid = c.id'
       },
       {
         statement: '4. Display all the details of the Customers from its corresponding fragments',
@@ -68,7 +68,7 @@ export class HomeComponent implements OnInit {
       },
       {
         statement: '5. Display the booking details of all the customers',
-        sql: '/raw?query=SELECT b.id,b.roomID,b.checkinat,b.checkoutat FROM Booking b INNER JOIN (SELECT * FROM CustomerMUM UNION SELECT * FROM CustomerPUN UNION SELECT * FROM CustomerGOA) c ON c.id = b.customerID'
+        sql: '/raw?query=SELECT b.id AS BookingID,b.roomID,b.checkinat,b.checkoutat, c.name AS Customer_Name, c.city FROM Booking b INNER JOIN (SELECT * FROM CustomerMUM UNION SELECT * FROM CustomerPUN UNION SELECT * FROM CustomerGOA) c ON c.id = b.customerID'
       },
       {
         statement: '6. Display the contents of Staff using the vertical fragments created',
