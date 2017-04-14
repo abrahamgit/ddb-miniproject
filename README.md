@@ -22,8 +22,6 @@ npm start
 ```
 4. Build project
 ```bash
-npm run build.dev             #dev build
-npm run build.prod            #prod build
-npm run build.prod.aot        #Build with AoT compilation
-npm run build.prod.rollup.aot #Build with AoT compilation and Rollup tree-shaking
+npm run webpack.build               # The output is built into dist/webpack/
 ```
+After building, the output folder(dist/webpack/) can be uploaded to the servers where the server would be spun on the output folder.
