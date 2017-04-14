@@ -16,7 +16,11 @@ module.exports = {
 			}
 			formatres = formatres.concat(row);
 		}
-		return formatres;
+		res = {
+			rows: formatres,
+			names: result.metaData
+		}
+		return res;
 	},
 
 	execute : function(callback) {

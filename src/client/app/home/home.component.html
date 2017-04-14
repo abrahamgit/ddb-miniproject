@@ -1,6 +1,4 @@
-<p>Howdy! Here's a list of awesome computer scientists. Do you know any others? Add to the list yourself.</p>
-
-<form (submit)="addName()">
+<!-- <form (submit)="addName()">
   <input [(ngModel)]="newName" name="newName" placeholder="Awesome Computer Scientist">
   <button type="submit">Add</button>
 </form>
@@ -8,3 +6,40 @@
 <ul>
   <li *ngFor="let name of names">{{name}}</li>
 </ul>
+ -->
+<div class="row" style="margin-right: 0px"> 
+	<div class=" sidenav">
+  		<a href="#" (click)="runQuery(query.sql, false)" *ngFor="let query of queries">{{query.statement}}</a>
+  		<a href="#" (click)="rawQuery()">Generic Query Runner!</a>
+	</div>
+	
+	<div *ngIf="raw" class="col-md-9 table-container">
+		<input [(ngModel)]="quer" name="quer" class="query-input" placeholder="Enter A Query"/>
+		<button (click)="runQuery('/raw?query=' + quer, true)" class="run-button">Run</button>
+	</div>
+	<div *ngIf="none" class="col-md-9 table-container" style="margin-top:20%">
+		<div class="code"></div><br/>
+		Run a Query to see results here!
+	</div>
+	<div *ngIf="err" class="col-md-9 table-container" style="margin-top:15%">
+		<div class="err"></div><br/>
+		An error occured!<br/>
+		{{error.message}}
+	</div>
+	<div class="col-md-9 table-container"> 
+		<table class="table">
+			<thead>
+				<tr>
+					<th style="text-align: center" *ngFor="let name of names">{{name.name}}</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr *ngFor="let row of rows">
+					<td *ngFor="let item of generateArray(row)">{{item}}</td>
+				</tr>
+			</tbody>
+		</table>
+		<span *ngIf = "insert">{{rowsAffected}}</span>
+	</div>
+	
+</div>

@@ -2,22 +2,7 @@ var utils = require('../utils.js');
 
 module.exports = function (req, res) {
 
-	var query = "SELECT " + req.query.columns + " FROM " + req.query.table;
-
-	if(req.query.join !== undefined) {
-		query += " INNER JOIN " + req.query.join + " ON " + req.query.on;
-	}
-
-
-	if(req.query.where !== undefined) {
-		query += " WHERE " + req.query.where;
-	}
-	if(req.query.groupby !== undefined) {
-		query += " GROUP BY " + req.query.groupby;
-	}
-	if(req.query.orderby !== undefined) {
-		query += " ORDER BY " + req.query.orderby;
-	}
+	var query = req.query.query;
 	console.log(query);
 	utils.execute(function(err, connection) {
 		if (err) {
@@ -36,7 +21,11 @@ module.exports = function (req, res) {
 	          return;
 	        }
 	        utils.doRelease(connection);
-	        res.status(200).json(utils.format(result));
+	        if(result.rows !== undefined) {
+		        res.status(200).json(utils.format(result));
+		    } else {
+		    	res.status(200).json({rowsAffected: result.rowsAffected});
+		    }
 	    });
 	});
 };

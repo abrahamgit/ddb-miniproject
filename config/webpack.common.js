@@ -86,7 +86,8 @@ module.exports = function () {
         Reflect: 'core-js/es7/reflect'
       }),
       new CopyWebpackPlugin([
-        { from: './src/client/assets', to: 'assets' }
+        { from: './src/client/assets', to: 'assets' },
+        { from: './src/client/bootstrap/css/bootstrap.min.css', to : 'bootstrap.min.css'}
       ]),
       new HtmlWebpackPlugin({
         template: './src/client/index.html',

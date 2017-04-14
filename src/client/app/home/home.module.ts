@@ -10,4 +10,4 @@ import { NameListService } from '../shared/name-list/name-list.service';
   exports: [HomeComponent],
   providers: [NameListService]
 })
-export class HomeModule { }
+export class HomeModule { } 

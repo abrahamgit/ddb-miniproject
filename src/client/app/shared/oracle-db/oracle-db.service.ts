@@ -1,59 +1,30 @@
 import { Injectable, Inject } from '@angular/core';
-import {ORACLE} from './index';
+import { Http, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class OracleDBService {
+	private base: string 
 	/**
 	 * Creates a new OracleDBService with injected oracledb
-	 * @param {ORACLE} oracledb - Injected oracledb to talk to the oracle db
 	 * @constructor
 	 */
-	constructor(@Inject(ORACLE) private oracledb: any) {
-		console.log(oracledb);
+	constructor(private http: Http) {
+		this.base = "http://localhost:3000";
 	}
 	
-	private connect(callback: any) {
-		this.oracledb.getConnection({
-			user         : 'pavan',
-			password     : 'pavan',
-			connectString: 'localhost/XE'
-		}, callback);
-	}
-	
-	private release(conn: any) {
-		conn.close((err: any)=>{
-			if(err) 
-				console.error("Couldn't release", err);
-		});
+	get(url: string): Observable<any> {
+		return this.http.get(this.base + url)
+                    .map((res: Response) => res.json())
+                    .catch(this.handleError);
 	}
 
-	select(columns: string, table: string, where: string, groupby: string, orderby: string) {
-		let query = "SELECT " + columns + " FROM " + table;
-		if(where != null && where !== '') {
-			query += " WHERE " + where;
-		}
-		if(groupby != null && groupby !== '') {
-			query += " GROUP BY " + groupby;
-		}
-		if(orderby != null && orderby !== '') {
-			query += " ORDER BY " + orderby;
-		}
-		this.connect((err: any, conn: any) => {
-			if(err) {
-				console.error("Couldn't connect", err);
-				return;
-			}
-			conn.execute(query, [], (err: any, result: any) => {
-				if(err) {
-					console.error("Couldn't select", err);
-					this.release(conn);
-					return;
-				}
-				console.log("Result", result);
-				this.release(conn);
-			});
-		});
+	private handleError (error: any) {
+	    // In a real world app, we might use a remote logging infrastructure
+	    // We'd also dig deeper into the error to get a better message
+	    console.log(error);
+	    let errMsg = JSON.parse(error._body)
+	    return Observable.throw(errMsg);
 	}
 }
 
