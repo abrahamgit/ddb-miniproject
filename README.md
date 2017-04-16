@@ -16,7 +16,7 @@ git clone https://github.com/pavan-08/ddb-miniproject.git
 cd ddb-miniproject/
 npm install
 ```
-3. Run the project
+3. Run the project on `http://localhost:8081`
 ```bash
 npm start
 ```
