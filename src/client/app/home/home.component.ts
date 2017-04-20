@@ -120,6 +120,44 @@ export class HomeComponent implements OnInit {
     this.none = true;
   }
 
+  crossSystem() {
+    this.raw = false;
+    this.none = false;
+    this.err = false;
+    this.rowsAffected = '';
+    this.rows = [];
+    this.names = [];
+    let query = '/raw?query=SELECT * FROM Customer';
+    this.oracle.get(query)
+        .subscribe( 
+          result => {
+            this.insert= false;
+            this.rows = result.rows;
+            this.names = result.names;
+            this.oracle.getRemote(query)
+                .subscribe( 
+                  result => {
+                    this.insert= false;
+                    this.rows = this.rows.concat(result.rows);
+                  },
+                  error => { 
+                    this.err=true;
+                    console.error(error);
+                    this.error = error;
+                    this.insert = false;
+                  }
+                );
+          },
+          error => { 
+            this.err=true;
+            console.error(error);
+            this.error = error;
+            this.insert = false;
+          }
+        );
+
+  }
+
   /**
    * Pushes a new name onto the names array
    * @return {boolean} false to prevent default form submit behavior to refresh the page.
