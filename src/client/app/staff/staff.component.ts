@@ -3,12 +3,12 @@ import { OracleDBService } from '../shared/oracle-db/oracle-db.service';
 
 @Component({
   /*moduleId: module.id,*/
-  selector: 'sd-customer',
-  templateUrl: 'customer.component.html',
-  styleUrls: ['customer.component.scss'], 
+  selector: 'sd-staff',
+  templateUrl: 'staff.component.html',
+  styleUrls: ['staff.component.scss'], 
 }) 
 
-export class CustomerComponent implements OnInit {
+export class StaffComponent implements OnInit {
 
 	forms: any[] = [];	
 	constructor(public oracle: OracleDBService) {
@@ -40,7 +40,7 @@ export class CustomerComponent implements OnInit {
 			this.forms[0].error = 'Do not leave any input empty';
 		} else {
 			this.forms[0].error = '';
-			query = "INSERT INTO Customer("+columns.join(',')+") VALUES("+values.join(',')+")";
+			query = "INSERT INTO Staff("+columns.join(',')+") VALUES("+values.join(',')+")";
 			this.oracle.get('/raw?query='+query).subscribe(
 				result => {
 					this.forms[0].result = 'rows affected -> '+ result.rowsAffected;
@@ -58,7 +58,7 @@ export class CustomerComponent implements OnInit {
 	}
 
 	update(): boolean {
-		let query: string = 'UPDATE Customer SET ';
+		let query: string = 'UPDATE Staff SET ';
 		let changes: string[] = [];
 		let err: boolean = false;
 		this.forms[1].inputs.forEach((input) => {
@@ -95,7 +95,7 @@ export class CustomerComponent implements OnInit {
 
 	del(): boolean {
 
-		let query: string = "DELETE FROM Customer WHERE ID=" + this.forms[2].inputs[0].value;
+		let query: string = "DELETE FROM Staff WHERE ID=" + this.forms[2].inputs[0].value;
 		this.forms[2].result = '';
 		if(this.forms[2].inputs[0].value == '') {
 			this.forms[2].error = 'Enter a valid ID';
@@ -150,22 +150,16 @@ export class CustomerComponent implements OnInit {
 						placeholder: 'Enter name'
 					},
 					{
-						type: 'email',
-						name: 'EMAILID',
-						value: '',
-						placeholder: 'Enter email id'
-					},
-					{
-						type: 'number',
-						name: 'CONTACT',
-						value: '',
-						placeholder: 'Enter contact'
-					},
-					{
 						type: 'date',
 						name: 'DOB',
 						value: '',
 						placeholder: 'Enter DOB'
+					},
+					{
+						type: 'text',
+						name: 'LOCATION',
+						value: '',
+						placeholder: 'Enter location'
 					},
 					{
 						type: 'text',
@@ -174,10 +168,16 @@ export class CustomerComponent implements OnInit {
 						placeholder: 'Enter gender (M or F)'
 					},
 					{
-						type: 'text',
-						name: 'CITY',
+						type: 'email',
+						name: 'EMAILID',
 						value: '',
-						placeholder: 'Enter city'
+						placeholder: 'Enter email id'
+					},
+					{
+						type: 'password',
+						name: 'PASSWORD',
+						value: '',
+						placeholder: 'Enter password'
 					}
 				],
 				submit : {
@@ -200,22 +200,16 @@ export class CustomerComponent implements OnInit {
 						placeholder: 'Enter name'
 					},
 					{
-						type: 'email',
-						name: 'EMAILID',
-						value: '',
-						placeholder: 'Enter email id'
-					},
-					{
-						type: 'number',
-						name: 'CONTACT',
-						value: '',
-						placeholder: 'Enter contact'
-					},
-					{
 						type: 'date',
 						name: 'DOB',
 						value: '',
 						placeholder: 'Enter DOB'
+					},
+					{
+						type: 'text',
+						name: 'LOCATION',
+						value: '',
+						placeholder: 'Enter location'
 					},
 					{
 						type: 'text',
@@ -224,10 +218,16 @@ export class CustomerComponent implements OnInit {
 						placeholder: 'Enter gender (M or F)'
 					},
 					{
-						type: 'text',
-						name: 'CITY',
+						type: 'email',
+						name: 'EMAILID',
 						value: '',
-						placeholder: 'Enter city'
+						placeholder: 'Enter email id'
+					},
+					{
+						type: 'password',
+						name: 'PASSWORD',
+						value: '',
+						placeholder: 'Enter password'
 					}
 				],
 				submit : {
@@ -241,7 +241,7 @@ export class CustomerComponent implements OnInit {
 						type: 'number',
 						name: 'ID',
 						value: '',
-						placeholder: 'Enter an ID to delete'
+						placeholder: 'Enter a ID to delete'
 					}
 				],
 				submit : {

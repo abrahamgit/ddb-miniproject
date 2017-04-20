@@ -3,12 +3,12 @@ import { OracleDBService } from '../shared/oracle-db/oracle-db.service';
 
 @Component({
   /*moduleId: module.id,*/
-  selector: 'sd-customer',
-  templateUrl: 'customer.component.html',
-  styleUrls: ['customer.component.scss'], 
+  selector: 'sd-category',
+  templateUrl: 'category.component.html',
+  styleUrls: ['category.component.scss'], 
 }) 
 
-export class CustomerComponent implements OnInit {
+export class CategoryComponent implements OnInit {
 
 	forms: any[] = [];	
 	constructor(public oracle: OracleDBService) {
@@ -40,7 +40,7 @@ export class CustomerComponent implements OnInit {
 			this.forms[0].error = 'Do not leave any input empty';
 		} else {
 			this.forms[0].error = '';
-			query = "INSERT INTO Customer("+columns.join(',')+") VALUES("+values.join(',')+")";
+			query = "INSERT INTO Category("+columns.join(',')+") VALUES("+values.join(',')+")";
 			this.oracle.get('/raw?query='+query).subscribe(
 				result => {
 					this.forms[0].result = 'rows affected -> '+ result.rowsAffected;
@@ -58,7 +58,7 @@ export class CustomerComponent implements OnInit {
 	}
 
 	update(): boolean {
-		let query: string = 'UPDATE Customer SET ';
+		let query: string = 'UPDATE Category SET ';
 		let changes: string[] = [];
 		let err: boolean = false;
 		this.forms[1].inputs.forEach((input) => {
@@ -95,7 +95,7 @@ export class CustomerComponent implements OnInit {
 
 	del(): boolean {
 
-		let query: string = "DELETE FROM Customer WHERE ID=" + this.forms[2].inputs[0].value;
+		let query: string = "DELETE FROM Category WHERE ID=" + this.forms[2].inputs[0].value;
 		this.forms[2].result = '';
 		if(this.forms[2].inputs[0].value == '') {
 			this.forms[2].error = 'Enter a valid ID';
@@ -150,34 +150,23 @@ export class CustomerComponent implements OnInit {
 						placeholder: 'Enter name'
 					},
 					{
-						type: 'email',
-						name: 'EMAILID',
+						type: 'number',
+						name: 'BEDCOUNT',
 						value: '',
-						placeholder: 'Enter email id'
+						placeholder: 'Enter number of beds'
 					},
 					{
 						type: 'number',
-						name: 'CONTACT',
+						name: 'ISAC',
 						value: '',
-						placeholder: 'Enter contact'
+						placeholder: 'If AC Room (1 or 0)'
 					},
+					
 					{
-						type: 'date',
-						name: 'DOB',
+						type: 'number',
+						name: 'PRICE',
 						value: '',
-						placeholder: 'Enter DOB'
-					},
-					{
-						type: 'text',
-						name: 'GENDER',
-						value: '',
-						placeholder: 'Enter gender (M or F)'
-					},
-					{
-						type: 'text',
-						name: 'CITY',
-						value: '',
-						placeholder: 'Enter city'
+						placeholder: 'Enter Price'
 					}
 				],
 				submit : {
@@ -200,34 +189,23 @@ export class CustomerComponent implements OnInit {
 						placeholder: 'Enter name'
 					},
 					{
-						type: 'email',
-						name: 'EMAILID',
+						type: 'number',
+						name: 'BEDCOUNT',
 						value: '',
-						placeholder: 'Enter email id'
+						placeholder: 'Enter number of beds'
 					},
 					{
 						type: 'number',
-						name: 'CONTACT',
+						name: 'ISAC',
 						value: '',
-						placeholder: 'Enter contact'
+						placeholder: 'If AC Room (1 or 0)'
 					},
+					
 					{
-						type: 'date',
-						name: 'DOB',
+						type: 'number',
+						name: 'PRICE',
 						value: '',
-						placeholder: 'Enter DOB'
-					},
-					{
-						type: 'text',
-						name: 'GENDER',
-						value: '',
-						placeholder: 'Enter gender (M or F)'
-					},
-					{
-						type: 'text',
-						name: 'CITY',
-						value: '',
-						placeholder: 'Enter city'
+						placeholder: 'Enter Price'
 					}
 				],
 				submit : {
