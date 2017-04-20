@@ -1,0 +1,32 @@
+.form {
+	margin: 10px;
+	h3 {
+		&::after {
+			content: "";
+		    display: block;
+		    height: 2px;
+		    width: 100%;
+		    margin-top: 10px;
+		    background: -webkit-gradient(linear, 0 0, 100% 0, from(black), color-stop(0.5, rgb(0, 0, 0)), to(transparent));
+		}
+	}
+	button {
+		margin: 5px;
+	}
+	.input {
+		margin: 5px;
+		input {
+			padding: 5px;
+		}
+	}
+	p{
+		&.err {
+			color: red;
+			font-weight: bold;
+		}
+		&.suc {
+			color: green;
+			font-weight: bold;
+		}
+	}
+}

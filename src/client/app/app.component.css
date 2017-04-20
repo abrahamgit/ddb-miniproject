@@ -3,3 +3,11 @@
   display: flex;
   flex-flow: column;
 }
+.header {
+	position: fixed;
+	width: 100%;
+	z-index: 10;
+}
+router-outlet {
+	margin-top: 110px;
+}

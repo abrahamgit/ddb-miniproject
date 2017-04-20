@@ -1,0 +1,9 @@
+<div class="form" *ngFor="let form of forms">
+	<h3><b>{{form.title}}</b></h3>
+	<div class="input" *ngFor="let input of form.inputs">
+		<input type="{{input.type}}" name="{{input.name}}" placeholder="{{input.placeholder}}" [(ngModel)]="input.value"/><br/>
+	</div>
+	<button (click)="submit(form.submit.button)">{{form.submit.button}}</button>
+	<p class="err" >{{form.error}}</p>
+	<p class="suc" >{{form.result}}</p>
+</div>
