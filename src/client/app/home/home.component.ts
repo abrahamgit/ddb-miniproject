@@ -133,11 +133,18 @@ export class HomeComponent implements OnInit {
           result => {
             this.insert= false;
             this.rows = result.rows;
+            this.rows.forEach((row) => {
+              row.SITE = 1;
+            });
             this.names = result.names;
+            this.names.push({name: 'SITE'});
             this.oracle.getRemote(query)
                 .subscribe( 
                   result => {
                     this.insert= false;
+                    result.rows.forEach((row) => {
+                      row.SITE = 2;
+                    });
                     this.rows = this.rows.concat(result.rows);
                   },
                   error => { 
