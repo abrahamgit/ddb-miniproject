@@ -7,6 +7,9 @@ switch (process.env.NODE_ENV) {
   case 'testing':
     module.exports = require('./config/webpack.test')();
     break;
+  case 'electron':
+    module.exports = require('./config/webpack.electron')();
+    break;
   case 'dev':
   case 'development':
   default:

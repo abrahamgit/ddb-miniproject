@@ -25,3 +25,19 @@ npm start
 npm run webpack.build               # The output is built into dist/webpack/
 ```
 After building, the output folder(dist/webpack/) can be uploaded to the servers where the server would be spun on the output folder.
+
+# Electron - Desktop application
+The project can be deployed as a desktop application working on Windows, Linux or macOS
+
+## Start desktop application
+```bash
+npm run start.desktop
+```
+
+## Deploy desktop application
+```bash
+npm run build.desktop.linux    #Linux build
+npm run build.desktop.mac      #macOS build
+npm run build.desktop.windows  #Windows build
+```
+The output is saved inside desktop directory in the project's root as a zip file which can be immediately unzipped and run in the respective OS

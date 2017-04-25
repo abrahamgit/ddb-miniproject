@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hotel Management System</title>
+<link rel="manifest" href="/manifest.json">
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="bootstrap.min.css">
+    <style>
+      html,
+      body,
+      div {
+        border: 0;
+        margin: 0;
+        padding: 0;
+      }
+
+      /* Box-sizing border-box */
+      * {
+        box-sizing: border-box;
+      }
+
+      /* Set up a default font and some padding to provide breathing room */
+      body {
+        font-family: Roboto, "Helvetica Neue", sans-serif;
+        font-size: 16px;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+
+      .shell {
+        background-color: #106cc8;
+        color: rgba(255, 255, 255, 0.87);
+        display: block;
+        height: 48px;
+        padding: 0 16px;
+        position: relative;
+      }
+
+      .shell h1 {
+        display: inline;
+        font-size: 20px;
+        font-weight: normal;
+        letter-spacing: 0.1px;
+        line-height: 48px;
+      }
+    </style>
+</head>
+<body>
+  <sd-app>
+    <div class="shell">
+      <h1>Hotel Management System</h1>
+    </div>
+  </sd-app>
+</body>
+<script>
+  require('electron-connect').client.create();
+  setTimeout(function() {
+        console.log('here');
+        document.querySelector('sd-navbar a').click();
+    }, 3000);
+</script>
+</html>
