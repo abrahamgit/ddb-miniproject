@@ -71,6 +71,9 @@ export class HomeComponent implements OnInit {
       {
         statement: '7. Display the biodata of all the workers of Staffs from its fragments',
         sql: '/raw?query=SELECT * FROM StaffBioMUM@hms2 UNION SELECT * FROM StaffBioPUN@hms2 UNION SELECT * FROM StaffBioGOA@hms2'
+      }, {
+        statement: '8. Generate total bill for all booking ids',
+        sql: '/raw?query=select id, sum(t) as total FROM ((select sum(b.quantity*c.price) as t, b.bookid as id from bill b  inner join room r on r.id=b.roomid inner join category c on c.id=r.categoryid where roomid is not null group by b.bookid) UNION (select sum(b.quantity*e.price) as t, b.bookid as id from bill b inner join extras e on e.id=b.extraid where extraid is not null group by b.bookid) UNION (select sum(b.quantity*o.price) as t, b.bookid as id from bill b inner join offers o on o.id=b.offerid where offerid is not null group by b.bookid)) group by id'
       }      
     ]
   }
@@ -115,6 +118,51 @@ export class HomeComponent implements OnInit {
     this.names=[];
     this.raw=true;
     this.none = true;
+  }
+
+  crossSystem() {
+    this.raw = false;
+    this.none = false;
+    this.err = false;
+    this.rowsAffected = '';
+    this.rows = [];
+    this.names = [];
+    let query = '/raw?query=SELECT * FROM Customer';
+    this.oracle.get(query)
+        .subscribe( 
+          result => {
+            this.insert= false;
+            this.rows = result.rows;
+            this.rows.forEach((row) => {
+              row.SITE = 1;
+            });
+            this.names = result.names;
+            this.names.push({name: 'SITE'});
+            this.oracle.getRemote(query)
+                .subscribe( 
+                  result => {
+                    this.insert= false;
+                    result.rows.forEach((row) => {
+                      row.SITE = 2;
+                    });
+                    this.rows = this.rows.concat(result.rows);
+                  },
+                  error => { 
+                    this.err=true;
+                    console.error(error);
+                    this.error = error;
+                    this.insert = false;
+                  }
+                );
+          },
+          error => { 
+            this.err=true;
+            console.error(error);
+            this.error = error;
+            this.insert = false;
+          }
+        );
+
   }
 
   /**

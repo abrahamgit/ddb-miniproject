@@ -47,6 +47,10 @@ lib
 test
 tmp
 
+# Electron builds
+
+desktop
+
 gulpfile.js
 gulpfile.js.map
 

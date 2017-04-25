@@ -10,6 +10,7 @@
 <div class="row" style="margin-right: 0px"> 
 	<div class=" sidenav">
   		<a href="#" (click)="runQuery(query.sql, false)" *ngFor="let query of queries">{{query.statement}}</a>
+  		<a href="#" (click)="crossSystem()">9. Get all customers from databases on different machines</a>
   		<a href="#" (click)="rawQuery()">Generic Query Runner!</a>
 	</div>
 	

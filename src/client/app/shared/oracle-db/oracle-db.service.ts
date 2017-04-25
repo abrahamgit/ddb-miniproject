@@ -4,17 +4,26 @@ import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class OracleDBService {
-	private base: string 
+	private base: string;
+	private remBase: string;
 	/**
 	 * Creates a new OracleDBService with injected oracledb
 	 * @constructor
 	 */
+
 	constructor(private http: Http) {
-		this.base = "http://localhost:3000";
+		this.base = "http://192.168.43.132:3000";
+		this.remBase = "http://192.168.43.6:3000";
 	}
 	
 	get(url: string): Observable<any> {
 		return this.http.get(this.base + url)
+                    .map((res: Response) => res.json())
+                    .catch(this.handleError);
+	}
+
+	getRemote(url: string) {
+		return this.http.get(this.remBase + url)
                     .map((res: Response) => res.json())
                     .catch(this.handleError);
 	}

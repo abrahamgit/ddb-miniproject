@@ -1,0 +1,15 @@
+<div class="form">
+	<h3><b>{{form.title}}</b></h3>
+	<div class="input" *ngFor="let input of form.inputs">
+		<div class="lab"><label>{{input.name}}</label><br/></div>
+		<input type="{{input.type}}" name="{{input.name}}" placeholder="{{input.placeholder}}" [(ngModel)]="input.value"/><br/>
+	</div>
+	<button (click)="view()">VIEW</button>
+	<button (click)="insert()">INSERT</button>
+	<button (click)="update()">UPDATE</button>
+	<button (click)="del()">DELETE</button>
+	<button (click)="clear()">RESET FORM</button>
+	<p class="err" >{{form.error}}</p>
+	<p class="suc" >{{form.result}}</p>
+	<p class="info">{{form.info}}</p>
+</div>
